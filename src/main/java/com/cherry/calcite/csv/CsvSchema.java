@@ -1,10 +1,9 @@
 package com.cherry.calcite.csv;
 
-import com.cherry.calcite.csv.flavor.CsvScannableTable;
+import com.cherry.calcite.csv.table.flavor.CsvScannableTable;
 import com.cherry.calcite.csv.table.CsvTable;
 import com.cherry.calcite.csv.utils.CommonUtils;
 import com.google.common.collect.ImmutableMap;
-import org.apache.calcite.schema.ScannableTable;
 import org.apache.calcite.schema.Table;
 import org.apache.calcite.schema.impl.AbstractSchema;
 import org.apache.calcite.util.Source;
@@ -76,7 +75,7 @@ public class CsvSchema extends AbstractSchema {
     private Table createTable(Source source) {
         switch (flavor) {
             case SCANNABLE:
-                return new CsvScannableTable();
+                return new CsvScannableTable(source,null);
             case FILTERABLE:
             case TRANSLATABLE:
             default:

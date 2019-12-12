@@ -1,6 +1,8 @@
 package com.cherry.calcite.csv.table;
 
+import com.cherry.calcite.csv.enumerator.CsvEnumerator;
 import com.cherry.calcite.csv.field.CsvFieldType;
+import org.apache.calcite.adapter.java.JavaTypeFactory;
 import org.apache.calcite.rel.type.RelDataType;
 import org.apache.calcite.rel.type.RelDataTypeFactory;
 import org.apache.calcite.rel.type.RelProtoDataType;
@@ -39,10 +41,10 @@ public abstract class CsvTable extends AbstractTable {
 
         if (fieldTypes == null) {
             fieldTypes = new ArrayList<>();
-
+            return CsvEnumerator.deduceRowType((JavaTypeFactory)relDataTypeFactory, source, fieldTypes);
+        } else {
+            return CsvEnumerator.deduceRowType((JavaTypeFactory)relDataTypeFactory, source, null);
         }
-
-        return null;
     }
 
     /**

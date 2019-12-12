@@ -1,7 +1,9 @@
 package com.cherry.calcite.csv.field;
 
 
+import org.apache.calcite.adapter.java.JavaTypeFactory;
 import org.apache.calcite.linq4j.tree.Primitive;
+import org.apache.calcite.rel.type.RelDataType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,5 +40,16 @@ public enum  CsvFieldType {
 
     CsvFieldType(Primitive primitive) {
         this(primitive.boxClass, primitive.primitiveName);
+    }
+
+
+    public static CsvFieldType of(String typeString) {
+        return MAP.get(typeString);
+    }
+
+    public RelDataType toType(JavaTypeFactory typeFactory) {
+        RelDataType javaType = typeFactory.createJavaType(clazz);
+        RelDataType sqlType = typeFactory.createSqlType(javaType.getSqlTypeName());
+        return typeFactory.createTypeWithNullability(sqlType,true);
     }
 }
