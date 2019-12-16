@@ -2,6 +2,7 @@ package com.cherry.calcite.csv;
 
 import com.cherry.calcite.csv.table.flavor.CsvScannableTable;
 import com.cherry.calcite.csv.table.CsvTable;
+import com.cherry.calcite.csv.table.flavor.CsvTranslatableTable;
 import com.cherry.calcite.csv.utils.CommonUtils;
 import com.google.common.collect.ImmutableMap;
 import org.apache.calcite.schema.Table;
@@ -78,6 +79,7 @@ public class CsvSchema extends AbstractSchema {
                 return new CsvScannableTable(source,null);
             case FILTERABLE:
             case TRANSLATABLE:
+                return new CsvTranslatableTable(source,null);
             default:
                 throw new AssertionError("Unknown flavor " + this.flavor);
 

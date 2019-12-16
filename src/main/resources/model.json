@@ -8,7 +8,14 @@
       "factory": "com.cherry.calcite.csv.CsvSchemaFactory",
       "operand": {
         "directory": "sales"
-      }
+      },
+      "tables": [
+        {
+          "name": "FEMALE_EMPS",
+          "type": "view",
+          "sql": "SELECT * FROM emps WHERE gender = 'F'"
+        }
+      ]
     }
   ]
 }

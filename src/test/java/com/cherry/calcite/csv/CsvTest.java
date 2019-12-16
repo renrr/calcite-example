@@ -21,11 +21,10 @@ public class CsvTest {
             Connection connection = DriverManager.getConnection("jdbc:calcite:model=" + configPath, info);
             CalciteConnection calciteConn = connection.unwrap(CalciteConnection.class);
             Statement st = connection.createStatement();
-            ResultSet resultSet = st.executeQuery("SELECT * FROM emps");
+            ResultSet resultSet = st.executeQuery("SELECT * FROM depts");// where DEPTNO=20
             if (resultSet.next()) {
                 System.out.println(resultSet.getString(1) +
-                        "\t" + resultSet.getString(2) + "\t" +
-                        resultSet.getString(3));
+                        "\t" + resultSet.getString(2) );
             }
             connection.close();
         } catch (Exception e) {
